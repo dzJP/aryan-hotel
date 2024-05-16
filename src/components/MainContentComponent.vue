@@ -1,11 +1,17 @@
 <template>
     <div class="main-content">
-            <div class="image-gallery">
-                <img v-for="(image, index) in images" :key="index" :src="image"
-                    :class="{ 'image': true, 'active': index === activeIndex }" />
-            </div>
-            <HotelLocationInfoComponent class="hotel-info"/>
+        <div class="image-gallery">
+            <img v-for="(image, index) in images" :key="index" :src="image"
+                :class="{ 'image': true, 'active': index === activeIndex }" @click="openModal(index)" />
         </div>
+        <HotelLocationInfoComponent class="hotel-info" />
+        <div class="modal" v-if="modalOpen" @click="toggleModal">
+            <span class="close" @click="closeModal">&times;</span>
+            <img :src="images[activeIndex]" class="modal-content">
+            <span class="prev" @click.stop="prevImage">&#10094;</span>
+            <span class="next" @click.stop="nextImage">&#10095;</span>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -52,26 +58,63 @@ export default {
                 require('@/assets/odalar/odalar33.png')
             ],
             activeIndex: 0,
-            fadingOut: false
+            fadingOut: false,
+            modalOpen: false,
+            intervalId: null
         };
     },
     mounted() {
-        setInterval(this.nextImage, 5000); // Change image every 5 seconds
+        this.startSlideshow();
     },
     methods: {
+        startSlideshow() {
+            this.intervalId = setInterval(this.nextImage, 5000);
+        },
+        stopSlideshow() {
+            clearInterval(this.intervalId);
+        },
+        openModal(index) {
+            this.activeIndex = index;
+            this.modalOpen = true;
+            this.stopSlideshow();
+        },
+        closeModal() {
+            this.modalOpen = false;
+            this.startSlideshow();
+        },
+        toggleModal() {
+            this.modalOpen = !this.modalOpen;
+            if (!this.modalOpen) {
+                this.startSlideshow();
+            }
+        },
         nextImage() {
-            this.fadingOut = true;
-            setTimeout(() => {
+            if (!this.modalOpen) {
+                this.fadingOut = true;
+                setTimeout(() => {
+                    this.activeIndex = (this.activeIndex + 1) % this.images.length;
+                    this.fadingOut = false;
+                }, 1000);
+            } else {
                 this.activeIndex = (this.activeIndex + 1) % this.images.length;
-                this.fadingOut = false;
-            }, 1000); // Wait for fade out transition to complete (1 second) before changing image
+            }
+        },
+        prevImage() {
+            if (!this.modalOpen) {
+                this.fadingOut = true;
+                setTimeout(() => {
+                    this.activeIndex = (this.activeIndex - 1 + this.images.length) % this.images.length;
+                    this.fadingOut = false;
+                }, 1000);
+            } else {
+                this.activeIndex = (this.activeIndex - 1 + this.images.length) % this.images.length;
+            }
         }
     }
 };
 </script>
 
 <style scoped>
-
 .main-content {
     display: flex;
     justify-content: center;
@@ -93,6 +136,7 @@ export default {
     border-radius: 5%;
     box-sizing: border-box;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .image.active {
@@ -107,4 +151,52 @@ export default {
     margin-right: 10%;
 }
 
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80%;
+    cursor: pointer;
+}
+
+.close {
+    color: #fff;
+    font-size: 2em;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+}
+
+.prev,
+.next {
+    color: #fff;
+    font-size: 3em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
 </style>

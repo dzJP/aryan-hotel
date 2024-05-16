@@ -131,7 +131,6 @@ export default {
     border-radius: 10%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
-    transition: transform 0.3s ease;
 }
 
 

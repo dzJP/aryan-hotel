@@ -59,4 +59,21 @@ section {
     padding: 2rem 10% 1rem;
 }
 
+@media (max-width: 360px) {
+    .heading {
+        font-size: 2rem;
+        margin: 5%;
+    }
+    .about-container .about-box {
+        flex: 1 1 90%;
+        padding: 4rem 1rem;
+    }
+
+    .about-box p {
+        font-size: 1.5em;
+    }
+}
+
+
+
 </style>

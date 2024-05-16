@@ -199,4 +199,27 @@ export default {
 .next {
     right: 20px;
 }
+
+@media (max-width: 360px) {
+    .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .image {
+        position: absolute;
+        top: 15%;
+        left: 8%;
+        width: 400px;
+        opacity: 0;
+        transition: opacity 2s ease;
+        border-radius: 5%;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
+
+}
 </style>

@@ -68,7 +68,6 @@ export default {
 };
 </script>
 <style>
-
 .hotel-title {
     text-align: center;
     font-size: 3em;
@@ -98,11 +97,47 @@ p {
     border-radius: 2rem;
     border: .2rem solid #868686;
     font-family: 'Futura', sans-serif;
-
 }
 
 .hotel-location {
     text-align: center;
     padding: 20px;
+}
+
+@media (max-width: 360px) {
+    .container {
+        position: absolute;
+        top: 60%;
+        left: 4%;
+        height: 300px;
+        width: 400px;
+    }
+
+    .container p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: 20%;
+        width: 100%;
+        font-weight: 700;
+    }
+    .container h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: wrap;
+        width: 100%;
+    }
+    .container h2 {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.5em;
+        font-weight: 700;
+    }
+
 }
 </style>

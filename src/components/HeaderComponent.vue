@@ -24,6 +24,7 @@
     background-color: #3a3935;
     color: white;
     border-bottom: 2px solid #ffd000;
+    z-index: 9999;
 }
 
 .title {

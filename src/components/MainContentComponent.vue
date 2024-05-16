@@ -106,4 +106,5 @@ export default {
 .hotel-info {
     margin-right: 10%;
 }
+
 </style>

@@ -7,9 +7,9 @@
         <div class="contact-container">
             <div class="contact-box">
                 <div class="contact-icon1">
-                    <a href="https://www.google.com">I am a clickable link</a>
-                    <p>0763291108</p>
-                    <p>Jakob_pietrzyk@outlook.com</p>
+                    <a href="https://www.google.com">Clickable link</a>
+                    <p>123456789</p>
+                    <p>aryanhotel@aryanhotel.com</p>
                 </div>
             </div>
         </div>
@@ -19,10 +19,11 @@
 .heading {
     text-align: center;
     font-size: 4rem;
+    margin: 10%;
 }
 
 .contact {
-    border-top: solid 1px var(--blue-heaven);
+    border-top: solid 2px #868686;
 }
 
 .contact-container {
@@ -32,17 +33,16 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
-
 }
 
 .contact-container .contact-box {
     color: var(--white);
     flex: 1 1 30rem;
-    background: var(--light-gray);
+    background-color: var(--testcolor);
     padding: 6rem 4rem 4rem;
     border-radius: 1rem;
     text-align: center;
-    border: .2rem solid var(--lightest-gray);
+    border: .2rem solid #868686;
     transition: .5s ease;
 }
 

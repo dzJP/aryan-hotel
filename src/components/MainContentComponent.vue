@@ -1,24 +1,63 @@
 <template>
     <div class="main-content">
-        <div class="image-gallery" v-if="images.length > 0">
-            <img :src="currentImage" :key="currentIndex" class="image" @click="toggleSize"
-                :class="{ enlarged: enlarged }" />
-            <div v-if="enlarged" class="navigation-buttons">
-                <button class="nav-button left" @click="prevImage">&#10094;</button>
-                <button class="nav-button right" @click="nextImage">&#10095;</button>
+        <div class="content-wrapper">
+            <div class="image-gallery" v-if="images.length > 0">
+                <img :src="currentImage" :key="currentIndex" class="image" @click="toggleSize"
+                    :class="{ enlarged: enlarged }" />
+                <div v-if="enlarged" class="navigation-buttons">
+                    <button class="nav-button left" @click="prevImage">&#10094;</button>
+                    <button class="nav-button right" @click="nextImage">&#10095;</button>
+                </div>
             </div>
+            <HotelLocationInfoComponent />
         </div>
     </div>
 </template>
 
 <script>
+import HotelLocationInfoComponent from './HotelLocationInfoComponent.vue';
+
 export default {
+    components: {
+        HotelLocationInfoComponent
+    },
     data() {
         return {
             images: [
-                require('@/assets/genel/genel1.png'),
-                require('@/assets/genel/genel2.png'),
-                // Add URLs of your images here
+                require('@/assets/odalar/odalar1.png'),
+                require('@/assets/odalar/odalar2.png'),
+                require('@/assets/odalar/odalar3.png'),
+                require('@/assets/odalar/odalar4.png'),
+                require('@/assets/odalar/odalar5.png'),
+                require('@/assets/odalar/odalar6.png'),
+                require('@/assets/odalar/odalar7.png'),
+                require('@/assets/odalar/odalar8.png'),
+                require('@/assets/odalar/odalar9.png'),
+                require('@/assets/odalar/odalar10.png'),
+                require('@/assets/odalar/odalar11.png'),
+                require('@/assets/odalar/odalar12.png'),
+                require('@/assets/odalar/odalar13.png'),
+                require('@/assets/odalar/odalar14.png'),
+                require('@/assets/odalar/odalar15.png'),
+                require('@/assets/odalar/odalar16.png'),
+                require('@/assets/odalar/odalar17.png'),
+                require('@/assets/odalar/odalar18.png'),
+                require('@/assets/odalar/odalar19.png'),
+                require('@/assets/odalar/odalar20.png'),
+                require('@/assets/odalar/odalar21.png'),
+                require('@/assets/odalar/odalar22.png'),
+                require('@/assets/odalar/odalar23.png'),
+                require('@/assets/odalar/odalar24.png'),
+                require('@/assets/odalar/odalar25.png'),
+                require('@/assets/odalar/odalar26.png'),
+                require('@/assets/odalar/odalar27.png'),
+                require('@/assets/odalar/odalar28.png'),
+                require('@/assets/odalar/odalar29.png'),
+                require('@/assets/odalar/odalar30.png'),
+                require('@/assets/odalar/odalar31.png'),
+                require('@/assets/odalar/odalar32.png'),
+                require('@/assets/odalar/odalar33.png')
+
             ],
             currentIndex: 0,
             intervalId: null,
@@ -72,40 +111,36 @@ export default {
     height: 100vh;
 }
 
+.content-wrapper {
+    display: flex;
+    gap: 10em;
+    height: 50vh;
+}
+
 .image-gallery {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .image {
-    width: 40%;
+    width: 800px;
     height: auto;
     cursor: pointer;
     border-radius: 10%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
     transition: transform 0.3s ease;
-    margin-left: 5%;
 }
 
-.image:not(.enlarged):hover {
-    border: 2px solid var(--blue-heaven);
-    transform: scale(1.05);
-}
 
 .enlarged {
     justify-content: center;
-    width: 80%;
+    width: 100%;
     height: auto;
-    position: relative;
-    left: 5%;
-    top: -6%;
     border: none;
 }
-
-
 .nav-button {
     background: transparent;
     border: none;

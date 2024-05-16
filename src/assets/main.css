@@ -1,5 +1,12 @@
 :root {
-    --blue-heaven: rgb(88, 178, 255); 
+    --blue-heaven: rgb(88, 178, 255);
+    --light: #eee9d8;
+    --lighter: #ffeaea;
+    --testcolor: rgb(236, 236, 236);
+}
+
+.app, html, body {
+    background-color: var(--light);
 }
 
 * {
@@ -10,4 +17,13 @@
     border: none;
     outline: none;
     scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: 'Futura';
+    src: url('./futuraregular.ttf');
+}
+
+.hotel-details, .title, .navbar, .contact, span, .about {
+    font-family: 'Futurua', sans-serif;
 }

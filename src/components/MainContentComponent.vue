@@ -1,22 +1,15 @@
 <template>
     <div class="main-content">
-        <div class="content-wrapper">
-            <div class="image-gallery" v-if="images.length > 0">
-                <img :src="currentImage" :key="currentIndex" class="image" @click="toggleSize"
-                    :class="{ enlarged: enlarged }" />
-                <div v-if="enlarged" class="navigation-buttons">
-                    <button class="nav-button left" @click="prevImage">&#10094;</button>
-                    <button class="nav-button right" @click="nextImage">&#10095;</button>
-                </div>
+            <div class="image-gallery">
+                <img v-for="(image, index) in images" :key="index" :src="image"
+                    :class="{ 'image': true, 'active': index === activeIndex }" />
             </div>
-            <HotelLocationInfoComponent />
+            <HotelLocationInfoComponent class="hotel-info"/>
         </div>
-    </div>
 </template>
 
 <script>
-import HotelLocationInfoComponent from './HotelLocationInfoComponent.vue';
-
+import HotelLocationInfoComponent from '@/components/HotelLocationInfoComponent.vue';
 export default {
     components: {
         HotelLocationInfoComponent
@@ -57,53 +50,28 @@ export default {
                 require('@/assets/odalar/odalar31.png'),
                 require('@/assets/odalar/odalar32.png'),
                 require('@/assets/odalar/odalar33.png')
-
             ],
-            currentIndex: 0,
-            intervalId: null,
-            enlarged: false // Track if image is enlarged or not
+            activeIndex: 0,
+            fadingOut: false
         };
     },
-    computed: {
-        currentImage() {
-            return this.images[this.currentIndex];
-        }
-    },
     mounted() {
-        if (this.images.length > 1) {
-            this.startSlideshow();
-        }
-    },
-    beforeUnmount() {
-        clearInterval(this.intervalId);
+        setInterval(this.nextImage, 5000); // Change image every 5 seconds
     },
     methods: {
-        startSlideshow() {
-            this.intervalId = setInterval(() => {
-                if (!this.enlarged) {
-                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-                }
-            }, 5000);
-        },
-        toggleSize() {
-            this.enlarged = !this.enlarged;
-            if (this.enlarged) {
-                clearInterval(this.intervalId);
-            } else {
-                this.startSlideshow();
-            }
-        },
         nextImage() {
-            this.currentIndex = (this.currentIndex + 1) % this.images.length;
-        },
-        prevImage() {
-            this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+            this.fadingOut = true;
+            setTimeout(() => {
+                this.activeIndex = (this.activeIndex + 1) % this.images.length;
+                this.fadingOut = false;
+            }, 1000); // Wait for fade out transition to complete (1 second) before changing image
         }
     }
 };
 </script>
 
-<style>
+<style scoped>
+
 .main-content {
     display: flex;
     justify-content: center;
@@ -111,49 +79,31 @@ export default {
     height: 100vh;
 }
 
-.content-wrapper {
-    display: flex;
-    gap: 10em;
-    height: 50vh;
-}
-
 .image-gallery {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: auto;
+    width: 100%;
 }
 
 .image {
-    width: 800px;
-    height: auto;
-    cursor: pointer;
-    border-radius: 10%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-}
-
-
-.enlarged {
-    justify-content: center;
-    width: 100%;
-    height: auto;
-    border: none;
-}
-.nav-button {
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: black;
     position: absolute;
+    top: 25%;
+    left: 10%;
+    width: 800px;
+    opacity: 0;
+    transition: opacity 2s ease;
+    border-radius: 5%;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-.nav-button.left {
-    left: 10px;
+.image.active {
+    opacity: 1;
 }
 
-.nav-button.right {
-    right: 10px;
+.image.active.fading-out {
+    opacity: 0;
+}
+
+.hotel-info {
+    margin-right: 10%;
 }
 </style>

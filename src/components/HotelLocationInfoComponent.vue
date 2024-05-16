@@ -72,12 +72,14 @@ export default {
 .hotel-title {
     text-align: center;
     font-size: 3em;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
+    white-space: nowrap;
 }
 
 h3 {
     font-size: 1.3em;
     margin-bottom: 5%;
+    white-space: nowrap;
 }
 
 p {
@@ -89,10 +91,9 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-height: 400px;
-    max-width: 80%;
-    padding: 2rem 0.2rem 3rem;
-    margin-top: 5%;
+    height: auto;
+    width: auto;
+    padding: 2rem 2rem 3rem;
     background-color: var(--testcolor);
     border-radius: 2rem;
     border: .2rem solid #868686;
